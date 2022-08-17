@@ -115,13 +115,23 @@ public partial class RubiksCube : MonoBehaviour
         {
             for (int n = 0; n < 4; n++)
             {
-                if (RK_col.GetCellColor(scanDirection[n], 1, 0) == Colors.Yellow)
+                if (RK_col.GetCellColor(scanDirection[n], 1, 1) != RK_col.GetCellColor(scanDirection[n], 1, 0))
                 { // replace left side
+                    if (n != 0)
+                    {
+                        int tempRot = (n == 3) ? -90 : n * (-90);
+                        SolveScript.Add("Y, " + tempRot.ToString());
+                    }
                     Align2ndRow_LeftTurn();
                     return;
                 }
-                if (RK_col.GetCellColor(scanDirection[n], 1, 2) == Colors.Yellow)
+                if (RK_col.GetCellColor(scanDirection[n], 1, 1) != RK_col.GetCellColor(scanDirection[n], 1, 2))
                 { // replace right side
+                    if (n != 0)
+                    {
+                        int tempRot = (n == 3) ? -90 : n * (-90);
+                        SolveScript.Add("Y, " + tempRot.ToString());
+                    }
                     Align2ndRow_RightTurn();
                     return;
                 }
