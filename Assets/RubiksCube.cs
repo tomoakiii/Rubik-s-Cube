@@ -291,7 +291,8 @@ public partial class RubiksCube : MonoBehaviour
         SolveScript.Clear();
         isAutoMode = AutoMode.None;
         AutoModeStage = 0;
-        EditorUtility.DisplayDialog("Error", inputstr, "OK");
+        Debug.Log(inputstr);
+        //EditorUtility.DisplayDialog("Error", inputstr, "OK");
     }
 
     private void RotateCube_Command(string command)

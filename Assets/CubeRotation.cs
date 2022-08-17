@@ -72,7 +72,8 @@ public class CubeRotation : MonoBehaviour
 
     private void EmergencyStop(string inputstr)
     {
-        EditorUtility.DisplayDialog("Error", inputstr, "OK");
+        Debug.Log(inputstr);
+        //EditorUtility.DisplayDialog("Error", inputstr, "OK");
     }
 
     private void MainRotation()
