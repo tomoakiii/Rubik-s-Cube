@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-
+using System.Diagnostics;
 public class LogScript : MonoBehaviour
 {
     public GameObject LogText;
@@ -34,6 +34,11 @@ public class LogScript : MonoBehaviour
         {
             logstr.text = GameLog[n] + "\n" + logstr.text;
         }
+    }
+
+    [Conditional("UNITY_EDITOR")]
+    public void MakeLog_FileWrite(List<string> GameLog)
+    {
         using (System.IO.FileStream fs = new System.IO.FileStream(FileName, FileMode.Create))
         using (StreamWriter streamWriter = new StreamWriter (fs))
         {
