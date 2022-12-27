@@ -16,7 +16,7 @@ public partial class RubiksCube : MonoBehaviour
         AutoModeStage = 5;
         SolveScript.Clear();
 
-        YtoDisignedColor(Colors.Yellow);
+        YtoDisignedColor(TargetColors[0]);
         if (SolveScript.Count > 0)
         {
             return;
@@ -69,8 +69,8 @@ public partial class RubiksCube : MonoBehaviour
         int is01dir = -1;
         for (int n = 0; n < 4; n++)
         {
-            if (RK_col.GetCellColor(scanDirection[n], 0, 1) != Colors.Yellow
-                && RK_col.GetCellColor("+Y", scanYPlus[n, 0], scanYPlus[n, 1]) != Colors.Yellow)
+            if (RK_col.GetCellColor(scanDirection[n], 0, 1) != TargetColors[0]
+                && RK_col.GetCellColor("+Y", scanYPlus[n, 0], scanYPlus[n, 1]) != TargetColors[0])
             {
                 is01dir = n;
                 if (RK_col.GetCellColor(scanDirection[n], 0, 1) == RK_col.GetCellColor(scanDirection[n], 1, 1))
@@ -143,29 +143,16 @@ public partial class RubiksCube : MonoBehaviour
 
     private void Align2ndRow_RightTurn()
     {
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, 1, 90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, 1, -90");
+        Solve_Operation_right();
         SolveScript.Add("Y, 90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, -1, 90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, -1, -90");
+        Solve_Operation_left();
     }
 
     private void Align2ndRow_LeftTurn()
     {
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, -1, 90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, -1, -90");
+        Solve_Operation_left();
         SolveScript.Add("Y, -90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, 1, 90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, 1, -90");
-
+        Solve_Operation_right();
     }
 
 }

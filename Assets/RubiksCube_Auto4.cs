@@ -50,21 +50,21 @@ public partial class RubiksCube : MonoBehaviour
     private void WhiteCorner_1() // pattern1: 2,0 == white then move it to +Z direction
     {
         Colors temp_color;
-        if (RK_col.GetCellColor("+X", 2, 0) == Colors.White) // -z direction
+        if (RK_col.GetCellColor("+X", 2, 0) == TargetColors[1]) // -z direction
         {
             temp_color = RK_col.GetCellColor("-Z", 2, 2);
             SolveScript.Add("Y, -1, -90");
         }
-        else if (RK_col.GetCellColor("+Z", 2, 0) == Colors.White) // +x direction
+        else if (RK_col.GetCellColor("+Z", 2, 0) == TargetColors[1]) // +x direction
         {
             temp_color = RK_col.GetCellColor("+X", 2, 2);
         }
-        else if (RK_col.GetCellColor("-Z", 2, 0) == Colors.White) // +z direction
+        else if (RK_col.GetCellColor("-Z", 2, 0) == TargetColors[1]) // +z direction
         {
             temp_color = RK_col.GetCellColor("-X", 2, 2);
             SolveScript.Add("Y, -1, 180");
         }
-        else if (RK_col.GetCellColor("-X", 2, 0) == Colors.White) // -x direction
+        else if (RK_col.GetCellColor("-X", 2, 0) == TargetColors[1]) // -x direction
         {
             temp_color = RK_col.GetCellColor("+Z", 2, 2);
             SolveScript.Add("Y, -1, 90");
@@ -114,21 +114,21 @@ public partial class RubiksCube : MonoBehaviour
     private void WhiteCorner_2() // pattern1: 2,2 == white then move it to -Z direction
     {
         Colors temp_color;
-        if (RK_col.GetCellColor("+X", 2, 2) == Colors.White) // -z direction
+        if (RK_col.GetCellColor("+X", 2, 2) == TargetColors[1]) // -z direction
         {
             temp_color = RK_col.GetCellColor("+Z", 2, 0);
             SolveScript.Add("Y, -1, 90");            
         }
-        else if (RK_col.GetCellColor("+Z", 2, 2) == Colors.White) // +x direction
+        else if (RK_col.GetCellColor("+Z", 2, 2) == TargetColors[1]) // +x direction
         {
             temp_color = RK_col.GetCellColor("-X", 2, 0);
             SolveScript.Add("Y, -1, 180");
         }
-        else if (RK_col.GetCellColor("-Z", 2, 2) == Colors.White) // +z direction
+        else if (RK_col.GetCellColor("-Z", 2, 2) == TargetColors[1]) // +z direction
         {
             temp_color = RK_col.GetCellColor("+X", 2, 0);
         }
-        else if (RK_col.GetCellColor("-X", 2, 2) == Colors.White) // -x direction
+        else if (RK_col.GetCellColor("-X", 2, 2) == TargetColors[1]) // -x direction
         {
             temp_color = RK_col.GetCellColor("-Z", 2, 0);
             SolveScript.Add("Y, -1, -90");
@@ -178,49 +178,49 @@ public partial class RubiksCube : MonoBehaviour
 
     private void WhiteCorner2_1() // if 0,0 or 0,2 on side is white
     {
-        if (RK_col.GetCellColor("+X", 0, 0) == Colors.White) // -z direction
+        if (RK_col.GetCellColor("+X", 0, 0) == TargetColors[1]) // -z direction
         {
             SolveScript.Add("Z, -1, -90");
             SolveScript.Add("Y, -1, 90");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("+Z", 0, 0) == Colors.White) // +x direction
+        else if (RK_col.GetCellColor("+Z", 0, 0) == TargetColors[1]) // +x direction
         {
             SolveScript.Add("X, 1, 90");
             SolveScript.Add("Y, -1, 90");
             SolveScript.Add("X, 1, -90");
         }
-        else if (RK_col.GetCellColor("-X", 0, 0) == Colors.White) // +z direction
+        else if (RK_col.GetCellColor("-X", 0, 0) == TargetColors[1]) // +z direction
         {
             SolveScript.Add("Z, 1, 90");
             SolveScript.Add("Y, -1, 90");
             SolveScript.Add("Z, 1, -90");
         }
-        else if (RK_col.GetCellColor("-Z", 0, 0) == Colors.White) // -x direction
+        else if (RK_col.GetCellColor("-Z", 0, 0) == TargetColors[1]) // -x direction
         {
             SolveScript.Add("X, -1, -90");
             SolveScript.Add("Y, -1, 90");
             SolveScript.Add("X, -1, 90");
         }
-        else if (RK_col.GetCellColor("+X", 0, 2) == Colors.White) // -z direction
+        else if (RK_col.GetCellColor("+X", 0, 2) == TargetColors[1]) // -z direction
         {
             SolveScript.Add("Z, 1, -90");
             SolveScript.Add("Y, -1, -90");
             SolveScript.Add("Z, 1, 90");
         }
-        else if (RK_col.GetCellColor("+Z", 0, 2) == Colors.White) // +x direction
+        else if (RK_col.GetCellColor("+Z", 0, 2) == TargetColors[1]) // +x direction
         {
             SolveScript.Add("X, -1, 90");
             SolveScript.Add("Y, -1, -90");
             SolveScript.Add("X, -1, -90");
         }
-        else if (RK_col.GetCellColor("-X", 0, 2) == Colors.White) // +z direction
+        else if (RK_col.GetCellColor("-X", 0, 2) == TargetColors[1]) // +z direction
         {
             SolveScript.Add("Z, -1, 90");
             SolveScript.Add("Y, -1, -90");
             SolveScript.Add("Z, -1, -90");
         }
-        else if (RK_col.GetCellColor("-Z", 0, 2) == Colors.White) // -x direction
+        else if (RK_col.GetCellColor("-Z", 0, 2) == TargetColors[1]) // -x direction
         {
             SolveScript.Add("X, 1, -90");
             SolveScript.Add("Y, -1, -90");
@@ -230,18 +230,18 @@ public partial class RubiksCube : MonoBehaviour
 
     private void WhiteCorner2_2() // if bottom corner is white
     {
-        if (RK_col.GetCellColor("-Y", 0, 0) == Colors.White) // -z direction
+        if (RK_col.GetCellColor("-Y", 0, 0) == TargetColors[1]) // -z direction
         {
         }
-        else if (RK_col.GetCellColor("-Y", 2, 2) == Colors.White) // -x direction
+        else if (RK_col.GetCellColor("-Y", 2, 2) == TargetColors[1]) // -x direction
         {
             SolveScript.Add("Y, -1, 180");
         }
-        else if (RK_col.GetCellColor("-Y", 0, 2) == Colors.White) // -x direction
+        else if (RK_col.GetCellColor("-Y", 0, 2) == TargetColors[1]) // -x direction
         {
             SolveScript.Add("Y, -1, 90");
         }
-        else if (RK_col.GetCellColor("-Y", 2, 0) == Colors.White) // -x direction
+        else if (RK_col.GetCellColor("-Y", 2, 0) == TargetColors[1]) // -x direction
         {
             SolveScript.Add("Y, -1, -90");
         }
@@ -249,13 +249,13 @@ public partial class RubiksCube : MonoBehaviour
         {
             return;
         }
-        if (RK_col.GetCellColor("+Y", 2, 0) != Colors.White) // -z direction
+        if (RK_col.GetCellColor("+Y", 2, 0) != TargetColors[1]) // -z direction
         {
             SolveScript.Add("Z, -1, -90");
             SolveScript.Add("Y, -1, 90");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("+Y", 0, 0) != Colors.White) // +x direction
+        else if (RK_col.GetCellColor("+Y", 0, 0) != TargetColors[1]) // +x direction
         {
             SolveScript.Add("Y, 1, -90");
             SolveScript.Add("Z, -1, -90");
@@ -263,7 +263,7 @@ public partial class RubiksCube : MonoBehaviour
             SolveScript.Add("Z, -1, 90");
             SolveScript.Add("Y, 1, 90");
         }
-        else if (RK_col.GetCellColor("+Y", 2, 2) == Colors.White) // +z direction
+        else if (RK_col.GetCellColor("+Y", 2, 2) != TargetColors[1]) // +z direction
         {
             SolveScript.Add("Y, 1, 90");
             SolveScript.Add("Z, -1, -90");
@@ -271,7 +271,7 @@ public partial class RubiksCube : MonoBehaviour
             SolveScript.Add("Z, -1, 90");
             SolveScript.Add("Y, 1, -90");
         }
-        else if (RK_col.GetCellColor("+Y", 0, 2) == Colors.White) // -x direction
+        else if (RK_col.GetCellColor("+Y", 0, 2) != TargetColors[1]) // -x direction
         {
             SolveScript.Add("Y, 1, 180");
             SolveScript.Add("Z, -1, -90");
@@ -283,13 +283,13 @@ public partial class RubiksCube : MonoBehaviour
 
     private void WhiteCorner3() // if top is all white but corner is not correct
     {
-        if (RK_col.GetCellColor("+Y", 2, 0) == Colors.White && RK_col.GetCellColor("+X", 0, 0) != RK_col.GetCellColor("+X", 1, 1)) // -z direction
+        if (RK_col.GetCellColor("+Y", 2, 0) == TargetColors[1] && RK_col.GetCellColor("+X", 0, 0) != RK_col.GetCellColor("+X", 1, 1)) // -z direction
         {
             SolveScript.Add("Z, -1, -90");
             SolveScript.Add("Y, -1, -90");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("+Y", 2, 2) == Colors.White && RK_col.GetCellColor("+Z", 0, 0) != RK_col.GetCellColor("+Z", 1, 1)) // -z direction
+        else if (RK_col.GetCellColor("+Y", 2, 2) == TargetColors[1] && RK_col.GetCellColor("+Z", 0, 0) != RK_col.GetCellColor("+Z", 1, 1)) // -z direction
         {
             SolveScript.Add("Y, 1, 90");
             SolveScript.Add("Z, -1, -90");
@@ -297,7 +297,7 @@ public partial class RubiksCube : MonoBehaviour
             SolveScript.Add("Z, -1, 90");
             SolveScript.Add("Y, 1, -90");
         }
-        else if (RK_col.GetCellColor("+Y", 0, 2) == Colors.White && RK_col.GetCellColor("-X", 0, 0) != RK_col.GetCellColor("-X", 1, 1)) // -z direction
+        else if (RK_col.GetCellColor("+Y", 0, 2) == TargetColors[1] && RK_col.GetCellColor("-X", 0, 0) != RK_col.GetCellColor("-X", 1, 1)) // -z direction
         {
             SolveScript.Add("Y, 1, 180");
             SolveScript.Add("Z, -1, -90");
@@ -305,7 +305,7 @@ public partial class RubiksCube : MonoBehaviour
             SolveScript.Add("Z, -1, 90");
             SolveScript.Add("Y, 1, 180");
         }
-        else if (RK_col.GetCellColor("+Y", 0, 0) == Colors.White && RK_col.GetCellColor("-Z", 0, 0) != RK_col.GetCellColor("-Z", 1, 1)) // -z direction
+        else if (RK_col.GetCellColor("+Y", 0, 0) == TargetColors[1] && RK_col.GetCellColor("-Z", 0, 0) != RK_col.GetCellColor("-Z", 1, 1)) // -z direction
         {
             SolveScript.Add("Y, 1, -90");
             SolveScript.Add("Z, -1, -90");

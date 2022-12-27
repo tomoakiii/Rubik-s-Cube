@@ -29,8 +29,8 @@ public partial class RubiksCube : MonoBehaviour
     private void YPlusAllYellow() // 
     {
         // Just in case debug check...
-        if (RK_col.GetCellColor("+Y", 0, 1) == Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) == Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) == Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) == Colors.Yellow)
+        if (RK_col.GetCellColor("+Y", 0, 1) == TargetColors[0] && RK_col.GetCellColor("+Y", 1, 0) == TargetColors[0] 
+            && RK_col.GetCellColor("+Y", 1, 2) == TargetColors[0] && RK_col.GetCellColor("+Y", 2, 1) == TargetColors[0])
         {
         }
         else
@@ -39,49 +39,49 @@ public partial class RubiksCube : MonoBehaviour
             return;
         }
 
-        if (RK_col.GetCellColor("+Y", 0, 0) == Colors.Yellow && RK_col.GetCellColor("+Y", 0, 2) == Colors.Yellow 
-        && RK_col.GetCellColor("+Y", 2, 0) == Colors.Yellow && RK_col.GetCellColor("+Y", 2, 2) == Colors.Yellow)
+        if (RK_col.GetCellColor("+Y", 0, 0) == TargetColors[0] && RK_col.GetCellColor("+Y", 0, 2) == TargetColors[0] 
+        && RK_col.GetCellColor("+Y", 2, 0) == TargetColors[0] && RK_col.GetCellColor("+Y", 2, 2) == TargetColors[0])
         { // Complete
             return;
         }
-        else if (RK_col.GetCellColor("+Y", 2, 2) == Colors.Yellow && RK_col.GetCellColor("+X", 0, 0) == Colors.Yellow 
-            && RK_col.GetCellColor("-X", 0, 0) == Colors.Yellow && RK_col.GetCellColor("-Z", 0, 0) == Colors.Yellow)
+        else if (RK_col.GetCellColor("+Y", 2, 2) == TargetColors[0] && RK_col.GetCellColor("+X", 0, 0) == TargetColors[0] 
+            && RK_col.GetCellColor("-X", 0, 0) == TargetColors[0] && RK_col.GetCellColor("-Z", 0, 0) == TargetColors[0])
         {
             DebugKeyword = DebugKeyword + "step7-1; ";
             Solve_OperationC1();
         }
-        else if (RK_col.GetCellColor("+Y", 2, 0) == Colors.Yellow && RK_col.GetCellColor("+X", 0, 2) == Colors.Yellow 
-            && RK_col.GetCellColor("+Z", 0, 2) == Colors.Yellow && RK_col.GetCellColor("-X", 0, 2) == Colors.Yellow)
+        else if (RK_col.GetCellColor("+Y", 2, 0) == TargetColors[0] && RK_col.GetCellColor("+X", 0, 2) == TargetColors[0] 
+            && RK_col.GetCellColor("+Z", 0, 2) == TargetColors[0] && RK_col.GetCellColor("-X", 0, 2) == TargetColors[0])
         {
             DebugKeyword = DebugKeyword + "step7-2; ";
             Solve_OperationC2();
         }
-        else if (RK_col.GetCellColor("+Y", 0, 0) == Colors.Yellow && RK_col.GetCellColor("+Y", 2, 0) == Colors.Yellow 
-            && RK_col.GetCellColor("+X", 0, 2) == Colors.Yellow && RK_col.GetCellColor("-X", 0, 0) == Colors.Yellow)
+        else if (RK_col.GetCellColor("+Y", 0, 0) == TargetColors[0] && RK_col.GetCellColor("+Y", 2, 0) == TargetColors[0] 
+            && RK_col.GetCellColor("+X", 0, 2) == TargetColors[0] && RK_col.GetCellColor("-X", 0, 0) == TargetColors[0])
         {
             DebugKeyword = DebugKeyword + "step7-3; ";
             Solve_OperationD();
         }
-        else if (RK_col.GetCellColor("+Y", 0, 0) == Colors.Yellow && RK_col.GetCellColor("+Y", 2, 2) == Colors.Yellow 
-            && RK_col.GetCellColor("+X", 0, 0) == Colors.Yellow && RK_col.GetCellColor("+Z", 0, 2) == Colors.Yellow)
+        else if (RK_col.GetCellColor("+Y", 0, 0) == TargetColors[0] && RK_col.GetCellColor("+Y", 2, 2) == TargetColors[0] 
+            && RK_col.GetCellColor("+X", 0, 0) == TargetColors[0] && RK_col.GetCellColor("+Z", 0, 2) == TargetColors[0])
         {
             DebugKeyword = DebugKeyword + "step7-4; ";
             Solve_OperationE();
         }
-        else if (RK_col.GetCellColor("+Y", 0, 0) == Colors.Yellow && RK_col.GetCellColor("+Y", 0, 2) == Colors.Yellow 
-            && RK_col.GetCellColor("+X", 0, 0) == Colors.Yellow && RK_col.GetCellColor("+X", 0, 2) == Colors.Yellow)
+        else if (RK_col.GetCellColor("+Y", 0, 0) == TargetColors[0] && RK_col.GetCellColor("+Y", 0, 2) == TargetColors[0] 
+            && RK_col.GetCellColor("+X", 0, 0) == TargetColors[0] && RK_col.GetCellColor("+X", 0, 2) == TargetColors[0])
         {
             DebugKeyword = DebugKeyword + "step7-5; ";
             Solve_OperationC1();
         }
-        else if (RK_col.GetCellColor("+Z", 0, 2) == Colors.Yellow && RK_col.GetCellColor("-Z", 0, 0) == Colors.Yellow 
-            && RK_col.GetCellColor("+X", 0, 0) == Colors.Yellow && RK_col.GetCellColor("+X", 0, 2) == Colors.Yellow)
+        else if (RK_col.GetCellColor("+Z", 0, 2) == TargetColors[0] && RK_col.GetCellColor("-Z", 0, 0) == TargetColors[0] 
+            && RK_col.GetCellColor("+X", 0, 0) == TargetColors[0] && RK_col.GetCellColor("+X", 0, 2) == TargetColors[0])
         {
             DebugKeyword = DebugKeyword + "step7-6; ";
             Solve_OperationC1();
         }
-        else if (RK_col.GetCellColor("+X", 0, 0) == Colors.Yellow && RK_col.GetCellColor("+X", 0, 2) == Colors.Yellow 
-            && RK_col.GetCellColor("-X", 0, 0) == Colors.Yellow && RK_col.GetCellColor("-X", 0, 2) == Colors.Yellow)
+        else if (RK_col.GetCellColor("+X", 0, 0) == TargetColors[0] && RK_col.GetCellColor("+X", 0, 2) == TargetColors[0] 
+            && RK_col.GetCellColor("-X", 0, 0) == TargetColors[0] && RK_col.GetCellColor("-X", 0, 2) == TargetColors[0])
         {
             DebugKeyword = DebugKeyword + "step7-7; ";
             Solve_OperationC1();

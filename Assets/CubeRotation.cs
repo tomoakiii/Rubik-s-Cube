@@ -9,6 +9,7 @@ public class CubeRotation : MonoBehaviour
     public bool isRotating = false;
     private float LocalTargetAngle = 0;
     private float TempAngle = 0;
+    private string colorstr;
     private bool isPositiveRotate = true;
     private Vector3 LocalRotationAxis, LocalRotationCenter, LocalTargetPosition;
     private Quaternion LocalTargetRotation;
@@ -27,6 +28,7 @@ public class CubeRotation : MonoBehaviour
             MainRotation();
         }
     }
+
 
     public void Initialize()
     {

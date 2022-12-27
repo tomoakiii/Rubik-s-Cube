@@ -45,7 +45,7 @@ public class CameraRotation : MonoBehaviour
             return;
         }
         float d = distance();
-        if (Input.GetMouseButton(1))//回転移動
+        if (Input.GetMouseButton(2))//回転移動
         {
             transform.Translate(-diff * Time.deltaTime * rotateSpeed * d);
             LookCameraTarget();

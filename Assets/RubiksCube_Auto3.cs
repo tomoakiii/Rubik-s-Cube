@@ -16,7 +16,7 @@ public partial class RubiksCube : MonoBehaviour
         AutoModeStage = 3;
         SolveScript.Clear();
 
-        YtoDisignedColor(Colors.White);
+        YtoDisignedColor(TargetColors[1]);
         if (SolveScript.Count > 0)
         {
             return;
@@ -33,20 +33,20 @@ public partial class RubiksCube : MonoBehaviour
     private void WhiteFlowerToTop_Side()
     {
         // make 0,1 on -Y being white if there is any white at cross line
-        if (RK_col.GetCellColor("-Y", 0, 1) == Colors.White)
+        if (RK_col.GetCellColor("-Y", 0, 1) == TargetColors[1])
         {
         }
-        else if (RK_col.GetCellColor("-Y", 1, 0) == Colors.White)
+        else if (RK_col.GetCellColor("-Y", 1, 0) == TargetColors[1])
         {
             SolveScript.Add("Y, -90");
             return;
         }
-        else if (RK_col.GetCellColor("-Y", 1, 2) == Colors.White)
+        else if (RK_col.GetCellColor("-Y", 1, 2) == TargetColors[1])
         {
             SolveScript.Add("Y, 90");
             return;
         }
-        else if (RK_col.GetCellColor("-Y", 2, 1) == Colors.White)
+        else if (RK_col.GetCellColor("-Y", 2, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, 180");
             return;

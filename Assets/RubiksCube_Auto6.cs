@@ -30,67 +30,33 @@ public partial class RubiksCube : MonoBehaviour
 
     private void YPlusYellowCross() // 
     {
-        bool actionFlag = false;
-        if (RK_col.GetCellColor("+Y", 0, 1) == Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) == Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) == Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) == Colors.Yellow)
+        if (RK_col.GetCellColor("+Y", 0, 1) == TargetColors[0] && RK_col.GetCellColor("+Y", 1, 0) == TargetColors[0] 
+            && RK_col.GetCellColor("+Y", 1, 2) == TargetColors[0] && RK_col.GetCellColor("+Y", 2, 1) == TargetColors[0])
         { // completed
             DebugKeyword = DebugKeyword + "step6-1; ";
             return;
         }
-        else if (RK_col.GetCellColor("+Y", 0, 1) == Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) != Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) == Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) != Colors.Yellow)
-        { // L shape
+        else if (RK_col.GetCellColor("+Y", 0, 1) == TargetColors[0] && RK_col.GetCellColor("+Y", 1, 0) != TargetColors[0] 
+            && RK_col.GetCellColor("+Y", 1, 2) == TargetColors[0] && RK_col.GetCellColor("+Y", 2, 1) != TargetColors[0])
+        { // 0:15 shape
             DebugKeyword = DebugKeyword + "step6-2; ";
-            actionFlag = true;
+            SolveScript.Add("Y, -90");
         }
-        else if (RK_col.GetCellColor("+Y", 0, 1) != Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) == Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) != Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) == Colors.Yellow)
-        { // reverse L shape
+        else if (RK_col.GetCellColor("+Y", 0, 1) != TargetColors[0] && RK_col.GetCellColor("+Y", 1, 0) == TargetColors[0] 
+            && RK_col.GetCellColor("+Y", 1, 2) != TargetColors[0] && RK_col.GetCellColor("+Y", 2, 1) == TargetColors[0])
+        { // 9:30
             DebugKeyword = DebugKeyword + "step6-3; ";
-            SolveScript.Add("Y, 1, 180");
-            actionFlag = true;
+            SolveScript.Add("Y, 90");
         }
-        else if (RK_col.GetCellColor("+Y", 0, 1) == Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) == Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) != Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) != Colors.Yellow)
-        { // -90deg L shape
-            DebugKeyword = DebugKeyword + "step6-4; ";
-            SolveScript.Add("Y, 1, 90");
-            actionFlag = true;
-        }
-        else if (RK_col.GetCellColor("+Y", 0, 1) != Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) != Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) == Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) == Colors.Yellow)
-        { // 90deg L shape
+        else if (RK_col.GetCellColor("+Y", 0, 1) != TargetColors[0] && RK_col.GetCellColor("+Y", 1, 0) != TargetColors[0] 
+            && RK_col.GetCellColor("+Y", 1, 2) == TargetColors[0] && RK_col.GetCellColor("+Y", 2, 1) == TargetColors[0])
+        { // 3:30
             DebugKeyword = DebugKeyword + "step6-5; ";
-            SolveScript.Add("Y, 1, -90");
-            actionFlag = true;
-        }
-        else if (RK_col.GetCellColor("+Y", 0, 1) == Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) != Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) != Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) == Colors.Yellow)
-        { // vertical bar
-            DebugKeyword = DebugKeyword + "step6-6; ";
-            actionFlag = true;
-        }
-        else if (RK_col.GetCellColor("+Y", 0, 1) != Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) == Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) == Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) != Colors.Yellow)
-        { // horizontal bar
-            DebugKeyword = DebugKeyword + "step6-7; ";
-            SolveScript.Add("Y, 1, 90");
-            actionFlag = true;
-        }
-        else if (RK_col.GetCellColor("+Y", 0, 1) != Colors.Yellow && RK_col.GetCellColor("+Y", 1, 0) != Colors.Yellow 
-            && RK_col.GetCellColor("+Y", 1, 2) != Colors.Yellow && RK_col.GetCellColor("+Y", 2, 1) != Colors.Yellow)
-        { // no yellow at cross line
-            DebugKeyword = DebugKeyword + "step6-8; ";
-            actionFlag = true;
-        }
-        else
-        {
-            EmergencyStop("Auto6 Error");
+            SolveScript.Add("Y, 180");
         }
         
-        if (actionFlag)
-        {
-            Solve_OperationB();
-        }
+        SolveScript.Add("X, 1, 90");
+        Solve_Operation_right();
+        SolveScript.Add("X, 1, -90");
     }
 }

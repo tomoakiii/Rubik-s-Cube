@@ -13,6 +13,13 @@ public class SingleCubeColor
     public Colors backward_Y;
     public Colors backward_Z;
 
+    public string str_forward_X = "Err";
+    public string str_forward_Y = "Err";
+    public string str_forward_Z = "Err";
+    public string str_backward_X = "Err";
+    public string str_backward_Y = "Err";
+    public string str_backward_Z = "Err";
+
     public SingleCubeColor()
     {
         forward_X = Colors.Green;
@@ -26,6 +33,7 @@ public class SingleCubeColor
     public void Rotate(string xyz)
     {
         Colors tmp;
+        string tmpstr;
         switch( xyz )
         {
             case "-X":
@@ -34,6 +42,11 @@ public class SingleCubeColor
                 backward_Y = backward_Z;
                 backward_Z = forward_Y;
                 forward_Y = tmp;
+                tmpstr = str_forward_Z;
+                str_forward_Z = str_backward_Y;
+                str_backward_Y = str_backward_Z;
+                str_backward_Z = str_forward_Y;
+                str_forward_Y = tmpstr;
                 break;
             case "+X":
                 tmp = forward_Z;
@@ -41,6 +54,11 @@ public class SingleCubeColor
                 forward_Y = backward_Z;
                 backward_Z = backward_Y;
                 backward_Y = tmp;
+                tmpstr = str_forward_Z;
+                str_forward_Z = str_forward_Y;
+                str_forward_Y = str_backward_Z;
+                str_backward_Z = str_backward_Y;
+                str_backward_Y = tmpstr;
                 break;
             case "-Y":
                 tmp = forward_X;
@@ -48,6 +66,12 @@ public class SingleCubeColor
                 backward_Z = backward_X;
                 backward_X = forward_Z;
                 forward_Z = tmp;
+
+                tmpstr = str_forward_X;
+                str_forward_X = str_backward_Z;
+                str_backward_Z = str_backward_X;
+                str_backward_X = str_forward_Z;
+                str_forward_Z = tmpstr;
                 break;
             case "+Y":
                 tmp = forward_X;
@@ -55,6 +79,12 @@ public class SingleCubeColor
                 forward_Z = backward_X;
                 backward_X = backward_Z;
                 backward_Z = tmp;
+
+                tmpstr = str_forward_X;
+                str_forward_X = str_forward_Z;
+                str_forward_Z = str_backward_X;
+                str_backward_X = str_backward_Z;
+                str_backward_Z = tmpstr;
                 break;
             case "+Z":
                 tmp = forward_X;
@@ -62,6 +92,12 @@ public class SingleCubeColor
                 backward_Y = backward_X;
                 backward_X = forward_Y;
                 forward_Y = tmp;
+
+                tmpstr = str_forward_X;
+                str_forward_X = str_backward_Y;
+                str_backward_Y = str_backward_X;
+                str_backward_X = str_forward_Y;
+                str_forward_Y = tmpstr;
                 break;
             case "-Z":
                 tmp = forward_X;
@@ -69,6 +105,12 @@ public class SingleCubeColor
                 forward_Y = backward_X;
                 backward_X = backward_Y;
                 backward_Y = tmp;
+
+                tmpstr = str_forward_X;
+                str_forward_X = str_forward_Y;
+                str_forward_Y = str_backward_X;
+                str_backward_X = str_backward_Y;
+                str_backward_Y = tmpstr;
                 break;
             default:
                 Debug.Log("EXCEPTION: ERORR SINGLE CUBE ROTATION");

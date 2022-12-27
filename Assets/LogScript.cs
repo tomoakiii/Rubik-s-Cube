@@ -39,8 +39,8 @@ public class LogScript : MonoBehaviour
     [Conditional("UNITY_EDITOR")]
     public void MakeLog_FileWrite(List<string> GameLog)
     {
-        using (System.IO.FileStream fs = new System.IO.FileStream(FileName, FileMode.Create))
-        using (StreamWriter streamWriter = new StreamWriter (fs))
+        using (System.IO.FileStream fs = new(FileName, FileMode.Create))
+        using (StreamWriter streamWriter = new(fs))
         {
             fs.SetLength(0);     
             for (int n = 0; n < GameLog.Count; n++)

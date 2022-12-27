@@ -13,12 +13,22 @@ public class RubiksCubeColorMap
     Colors[,] ZPSideColor = new Colors[3,3];
     Colors[,] ZNSideColor = new Colors[3,3];
 
+    string[,] XPSideColStr = new string[3, 3];
+    string[,] XNSideColStr = new string[3, 3];
+    string[,] YPSideColStr = new string[3, 3];
+    string[,] YNSideColStr = new string[3, 3];
+    string[,] ZPSideColStr = new string[3, 3];
+    string[,] ZNSideColStr = new string[3, 3];
+
+
+
     // Start is called before the first frame update
-    public RubiksCubeColorMap()
+    public RubiksCubeColorMap(GameObject[,,] RK)
     {
-        for (int Y = 0; Y < 3; Y++)
+        int X, Y, Z;
+        for (Y = 0; Y < 3; Y++)
         {
-            for (int X = 0; X < 3; X++)
+            for (X = 0; X < 3; X++)
             {
                 XPSideColor[Y, X] = Colors.Green;
                 YPSideColor[Y, X] = Colors.White;
@@ -26,20 +36,19 @@ public class RubiksCubeColorMap
                 XNSideColor[Y, X] = Colors.Blue;
                 YNSideColor[Y, X] = Colors.Yellow;
                 ZNSideColor[Y, X] = Colors.Orange;
+
+
             }
         }
-    }
 
-    public void  SetRK(GameObject[,,] RK)
-    {
-        // Positive X
-        int X, Y, Z;
         X = 2;
         for (Y = 0; Y < 3; Y++)
         {
             for (Z = 0; Z < 3; Z++)
             {
-                XPSideColor[2-Y, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.forward_X;
+                RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_X = "GRE" + (2 - Y).ToString() + Z.ToString();
+                XPSideColor[2 - Y, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.forward_X;
+                XPSideColStr[2 - Y, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_X;
             }
         }
 
@@ -49,7 +58,85 @@ public class RubiksCubeColorMap
         {
             for (Z = 0; Z < 3; Z++)
             {
-                XNSideColor[2-Y, 2-Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_X;
+                RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_X = "BLU" + (2 - Y).ToString() + (2 - Z).ToString();
+                XNSideColor[2 - Y, 2 - Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_X;
+                XNSideColStr[2 - Y, 2 - Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_X;
+            }
+        }
+
+        // Positive Y
+        Y = 2;
+        for (X = 0; X < 3; X++)
+        {
+            for (Z = 0; Z < 3; Z++)
+            {
+                RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_Y = "WHI" + (X).ToString() + (Z).ToString();
+                YPSideColor[X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.forward_Y;
+                YPSideColStr[X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_Y;
+            }
+        }
+
+        // Negative Y
+        Y = 0;
+        for (X = 0; X < 3; X++)
+        {
+            for (Z = 0; Z < 3; Z++)
+            {
+                RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_Y = "YEL" + (2 - X).ToString() + (Z).ToString();
+                YNSideColor[2 - X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_Y;
+                YNSideColStr[2 - X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_Y;
+            }
+        }
+
+        // Positive Z
+        Z = 2;
+        for (X = 0; X < 3; X++)
+        {
+            for (Y = 0; Y < 3; Y++)
+            {
+
+                RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_Z = "RED" + (2 - Y).ToString() + (2 - X).ToString();
+                ZPSideColor[2 - Y, 2 - X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.forward_Z;
+                ZPSideColStr[2 - Y, 2 - X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_Z;
+            }
+        }
+
+        // Negative Z
+        Z = 0;
+        for (X = 0; X < 3; X++)
+        {
+            for (Y = 0; Y < 3; Y++)
+            {
+                RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_Z = "ORA" + (2 - Y).ToString() + (X).ToString();
+                ZNSideColor[2 - Y, X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_Z;
+                ZNSideColStr[2 - Y, X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_Z;
+            }
+        }
+
+    }
+
+    public void SetRK(GameObject[,,] RK)
+    {
+        // Positive X
+        int X, Y, Z;
+        X = 2;
+        for (Y = 0; Y < 3; Y++)
+        {
+            for (Z = 0; Z < 3; Z++)
+            {
+                XPSideColor[2 - Y, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.forward_X;
+                XPSideColStr[2 - Y, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_X;
+            }
+        }
+
+        // Negative X
+        X = 0;
+        for (Y = 0; Y < 3; Y++)
+        {
+            for (Z = 0; Z < 3; Z++)
+            {
+                XNSideColor[2 - Y, 2 - Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_X;
+                XNSideColStr[2 - Y, 2 - Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_X;
             }
         }
 
@@ -60,6 +147,7 @@ public class RubiksCubeColorMap
             for (Z = 0; Z < 3; Z++)
             {
                 YPSideColor[X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.forward_Y;
+                YPSideColStr[X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_Y;
             }
         }
 
@@ -69,7 +157,8 @@ public class RubiksCubeColorMap
         {
             for (Z = 0; Z < 3; Z++)
             {
-                YNSideColor[2-X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_Y;
+                YNSideColor[2 - X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_Y;
+                YNSideColStr[2 - X, Z] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_Y;
             }
         }
 
@@ -79,7 +168,8 @@ public class RubiksCubeColorMap
         {
             for (Y = 0; Y < 3; Y++)
             {
-                ZPSideColor[2-Y, 2-X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.forward_Z;
+                ZPSideColor[2 - Y, 2 - X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.forward_Z;
+                ZPSideColStr[2 - Y, 2 - X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_forward_Z;
             }
         }
 
@@ -89,7 +179,8 @@ public class RubiksCubeColorMap
         {
             for (Y = 0; Y < 3; Y++)
             {
-                ZNSideColor[2-Y, X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_Z;
+                ZNSideColor[2 - Y, X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.backward_Z;
+                ZNSideColStr[2 - Y, X] = RK[X, Y, Z].GetComponent<CubeRotation>().color.str_backward_Z;
             }
         }
     }
@@ -100,6 +191,7 @@ public class RubiksCubeColorMap
         {
             case "-X":
                 return XNSideColor;
+
             case "+X":
                 return XPSideColor;
                 
@@ -152,60 +244,23 @@ public class RubiksCubeColorMap
 
     public string GetCellColorStr(string xyz, int ind1, int ind2)
     {
-        Colors cout;
         switch( xyz )
         {
             case "-X":
-                cout = XNSideColor[ind1, ind2];
-                break;
+                return XNSideColStr[ind1, ind2];
             case "+X":
-                cout = XPSideColor[ind1, ind2];
-                break;
+                return XPSideColStr[ind1, ind2];
             case "-Y":
-                cout = YNSideColor[ind1, ind2];
-                break;
+                return YNSideColStr[ind1, ind2];
             case "+Y":
-                cout = YPSideColor[ind1, ind2];
-                break;
+                return YPSideColStr[ind1, ind2];
             case "-Z":
-                cout = ZNSideColor[ind1, ind2];
-                break;
+                return ZNSideColStr[ind1, ind2];
             case "+Z":
-                cout = ZPSideColor[ind1, ind2];
-                break;
+                return ZPSideColStr[ind1, ind2];
             default:
                 Debug.Log("EXCEPTION: ERORR GET SIDE COLOR");
-                cout = Colors.ErrorCol;
-                break;
-        }
-
-        switch (cout)
-        {
-            case (Colors.Red):
-                return "Red";
-
-            case (Colors.Green):
-                return "Green";
-
-            case (Colors.Blue):
-                return "Blue";
-
-            case (Colors.Yellow):
-                return "Yellow";
-
-            case (Colors.White):
-                return "White";
-
-            case (Colors.Orange):
-                return "Orange";
-
-            case (Colors.Black):
-                return "Black";
-
-            default:
                 return "ErrorCol";
-            
         }
     }
-
 }

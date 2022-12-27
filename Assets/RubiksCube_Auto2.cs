@@ -52,26 +52,26 @@ public partial class RubiksCube : MonoBehaviour
     private void FindTopMiddleYellow()
     {
         // Making Flower around negative Y (yellow) = move white middle part to next to center yellow
-        if ((RK_col.GetCellColor("+X", 1, 2) != Colors.White)
-         && (RK_col.GetCellColor("-Z", 1, 2) != Colors.White)
-         && (RK_col.GetCellColor("-X", 1, 2) != Colors.White)
-         && (RK_col.GetCellColor("+Z", 1, 2) != Colors.White))
+        if ((RK_col.GetCellColor("+X", 1, 2) != TargetColors[1])
+         && (RK_col.GetCellColor("-Z", 1, 2) != TargetColors[1])
+         && (RK_col.GetCellColor("-X", 1, 2) != TargetColors[1])
+         && (RK_col.GetCellColor("+Z", 1, 2) != TargetColors[1]))
         {
             return;
         }
 
         // check if next to yellow is already white
-        if (RK_col.GetCellColor("+Y", 1, 2) == Colors.White)
+        if (RK_col.GetCellColor("+Y", 1, 2) == TargetColors[1])
         {
-            if (RK_col.GetCellColor("+Y", 0, 1) != Colors.White)
+            if (RK_col.GetCellColor("+Y", 0, 1) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, 90");
             }
-            else if (RK_col.GetCellColor("+Y", 1, 0) != Colors.White)
+            else if (RK_col.GetCellColor("+Y", 1, 0) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, 180");
             }
-            else if (RK_col.GetCellColor("+Y", 2, 1) != Colors.White)
+            else if (RK_col.GetCellColor("+Y", 2, 1) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, -90");
             }
@@ -80,21 +80,21 @@ public partial class RubiksCube : MonoBehaviour
                 return; // Nothing on list
             }
         }
-        if (RK_col.GetCellColor("+X", 1, 2) == Colors.White)
+        if (RK_col.GetCellColor("+X", 1, 2) == TargetColors[1])
         {
             SolveScript.Add("Z, 1, 90");
         }
-        else if (RK_col.GetCellColor("-Z", 1, 2) == Colors.White)
+        else if (RK_col.GetCellColor("-Z", 1, 2) == TargetColors[1])
         {
             SolveScript.Add("Y, 0, -90");
             SolveScript.Add("Z, 1, 90");
         }
-        else if (RK_col.GetCellColor("-X", 1, 2) == Colors.White)
+        else if (RK_col.GetCellColor("-X", 1, 2) == TargetColors[1])
         {
             SolveScript.Add("Y, 0, 180");
             SolveScript.Add("Z, 1, 90");
         }
-        else if (RK_col.GetCellColor("+Z", 1, 2) == Colors.White)
+        else if (RK_col.GetCellColor("+Z", 1, 2) == TargetColors[1])
         {
             SolveScript.Add("Y, 0, 90");
             SolveScript.Add("Z, 1, 90");
@@ -107,27 +107,27 @@ public partial class RubiksCube : MonoBehaviour
 
     private void FindTopMiddleYellow_Rev()
     {
-        if ((RK_col.GetCellColor("+X", 1, 0) != Colors.White)
-         && (RK_col.GetCellColor("-Z", 1, 0) != Colors.White)
-         && (RK_col.GetCellColor("-X", 1, 0) != Colors.White)
-         && (RK_col.GetCellColor("+Z", 1, 0) != Colors.White))
+        if ((RK_col.GetCellColor("+X", 1, 0) != TargetColors[1])
+         && (RK_col.GetCellColor("-Z", 1, 0) != TargetColors[1])
+         && (RK_col.GetCellColor("-X", 1, 0) != TargetColors[1])
+         && (RK_col.GetCellColor("+Z", 1, 0) != TargetColors[1]))
         {
             return;
         }
 
         // Making Flower around negative Y (yellow) = move white middle part to next to center yellow
         // check if next to yellow is already white
-        if (RK_col.GetCellColor("+Y", 1, 0) == Colors.White)
+        if (RK_col.GetCellColor("+Y", 1, 0) == TargetColors[1])
         {
-            if (RK_col.GetCellColor("+Y", 0, 1) != Colors.White)
+            if (RK_col.GetCellColor("+Y", 0, 1) != TargetColors[1])
             {
                 SolveScript.Add("Y, -1, -90");
             }
-            else if (RK_col.GetCellColor("+Y", 1, 2) != Colors.White)
+            else if (RK_col.GetCellColor("+Y", 1, 2) != TargetColors[1])
             {
                 SolveScript.Add("Y, -1, 180");
             }
-            else if (RK_col.GetCellColor("+Y", 2, 1) != Colors.White)
+            else if (RK_col.GetCellColor("+Y", 2, 1) != TargetColors[1])
             {
                 SolveScript.Add("Y, -1, 90");
             }
@@ -136,21 +136,21 @@ public partial class RubiksCube : MonoBehaviour
                 return; // Nothing on list
             }
         }
-        if (RK_col.GetCellColor("+X", 1, 0) == Colors.White)
+        if (RK_col.GetCellColor("+X", 1, 0) == TargetColors[1])
         {
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("-Z", 1, 0) == Colors.White)
+        else if (RK_col.GetCellColor("-Z", 1, 0) == TargetColors[1])
         {
             SolveScript.Add("Y, 0, -90");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("-X", 1, 0) == Colors.White)
+        else if (RK_col.GetCellColor("-X", 1, 0) == TargetColors[1])
         {
             SolveScript.Add("Y, 0, 180");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("+Z", 1, 0) == Colors.White)
+        else if (RK_col.GetCellColor("+Z", 1, 0) == TargetColors[1])
         {
             SolveScript.Add("Y, 0, 90");
             SolveScript.Add("Z, -1, 90");
@@ -165,17 +165,17 @@ public partial class RubiksCube : MonoBehaviour
     {
         // Making Flower around negative Y (yellow) = move white middle part to next to center yellow
         // check if next to yellow is already white
-        if (RK_col.GetCellColor("+Y", 1, 0) == Colors.White)
+        if (RK_col.GetCellColor("+Y", 1, 0) == TargetColors[1])
         {
-            if (RK_col.GetCellColor("+Y", 0, 1) != Colors.White)
+            if (RK_col.GetCellColor("+Y", 0, 1) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, -90");
             }
-            else if (RK_col.GetCellColor("+Y", 1, 2) != Colors.White)
+            else if (RK_col.GetCellColor("+Y", 1, 2) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, 180");
             }
-            else if (RK_col.GetCellColor("+Y", 2, 1) != Colors.White)
+            else if (RK_col.GetCellColor("+Y", 2, 1) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, 90");
             }
@@ -184,21 +184,21 @@ public partial class RubiksCube : MonoBehaviour
                 return; // Nothing on list
             }
         }
-        if (RK_col.GetCellColor("-Y", 1, 0) == Colors.White)
+        if (RK_col.GetCellColor("-Y", 1, 0) == TargetColors[1])
         {
             SolveScript.Add("Z, -1, 180");
         }
-        else if (RK_col.GetCellColor("-Y", 0, 1) == Colors.White)
+        else if (RK_col.GetCellColor("-Y", 0, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, -1, 90");
             SolveScript.Add("Z, -1, 180");
         }
-        else if (RK_col.GetCellColor("-Y", 1, 2) == Colors.White)
+        else if (RK_col.GetCellColor("-Y", 1, 2) == TargetColors[1])
         {
             SolveScript.Add("Y, -1, 180");
             SolveScript.Add("Z, -1, 180");
         }
-        else if (RK_col.GetCellColor("-Y", 2, 1) == Colors.White)
+        else if (RK_col.GetCellColor("-Y", 2, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, -1, -90");
             SolveScript.Add("Z, -1, 180");
@@ -211,22 +211,22 @@ public partial class RubiksCube : MonoBehaviour
 
     private void FindTopMiddleYellow_Side1()
     {
-        if (RK_col.GetCellColor("+X", 0, 1) == Colors.White)
+        if (RK_col.GetCellColor("+X", 0, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, 1, 90");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("+Z", 0, 1) == Colors.White)
+        else if (RK_col.GetCellColor("+Z", 0, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, 1, 180");
             SolveScript.Add("Z, -1, 180");
         }
-        else if (RK_col.GetCellColor("-X", 0, 1) == Colors.White)
+        else if (RK_col.GetCellColor("-X", 0, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, 1, -90");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("-Z", 0, 1) == Colors.White)
+        else if (RK_col.GetCellColor("-Z", 0, 1) == TargetColors[1])
         {
             SolveScript.Add("Z, -1, 90");
         }
@@ -234,17 +234,17 @@ public partial class RubiksCube : MonoBehaviour
 
     private void FindTopMiddleYellow_Side2()
     {
-        if (RK_col.GetCellColor("+Y", 1, 0) == Colors.White)
+        if (RK_col.GetCellColor("+Y", 1, 0) == TargetColors[1])
         {
-            if (RK_col.GetCellColor("+Y", 0, 1) != Colors.White)
+            if (RK_col.GetCellColor("+Y", 0, 1) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, -90");
             }
-            else if (RK_col.GetCellColor("+Y", 1, 2) != Colors.White)
+            else if (RK_col.GetCellColor("+Y", 1, 2) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, 180");
             }
-            else if (RK_col.GetCellColor("+Y", 2, 1) != Colors.White)
+            else if (RK_col.GetCellColor("+Y", 2, 1) != TargetColors[1])
             {
                 SolveScript.Add("Y, 1, 90");
             }
@@ -255,23 +255,23 @@ public partial class RubiksCube : MonoBehaviour
         }
         // Making Flower around negative Y (yellow) = move white middle part to next to center yellow
         // check if next to yellow is already white
-        else if (RK_col.GetCellColor("+X", 2, 1) == Colors.White)
+        else if (RK_col.GetCellColor("+X", 2, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, -1, 90");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("+Z", 2, 1) == Colors.White)
+        else if (RK_col.GetCellColor("+Z", 2, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, -1, 180");
             SolveScript.Add("Z, -1, 90");
         }
         
-        else if (RK_col.GetCellColor("-X", 2, 1) == Colors.White)
+        else if (RK_col.GetCellColor("-X", 2, 1) == TargetColors[1])
         {
             SolveScript.Add("Y, -1, -90");
             SolveScript.Add("Z, -1, 90");
         }
-        else if (RK_col.GetCellColor("-Z", 2, 1) == Colors.White)
+        else if (RK_col.GetCellColor("-Z", 2, 1) == TargetColors[1])
         {
             SolveScript.Add("Z, -1, 90");
         }

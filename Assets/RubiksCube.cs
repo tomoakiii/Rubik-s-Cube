@@ -12,24 +12,22 @@ using UnityEditor;
 public partial class RubiksCube : MonoBehaviour
 {
     public GameObject[] cubes;
-    private GameObject clickedGameObject1 = null;
-    private Vector3 mouseClick1;
-    private Vector3 mouseClick2;
+
     private bool WaitRotation;
     private GameObject MainCamera;
     private int RandomIndex = -1;
     private GameObject[,,] RK;
     private RubiksCubeColorMap RK_col;
-    private List<string> GameLog = new List<String>();
-    private List<string> SolveScript = new List<String>();
+    private List<string> GameLog = new();
+    private List<string> SolveScript = new();
     public GameObject LogPanel;
     private LogScript logscript;
     private DebugScript debugscript;
     private InputScript inputscript;
-    private int AutoModeStage = 0;
+    private int AutoModeStage = 0, AutoModeStopStage = 0;
     private string DebugKeyword = "";
 
-    System.Random r1 = new System.Random();
+    System.Random r1 = new();
     // Start is called before the first frame update
     private enum AutoMode
     {
@@ -49,7 +47,6 @@ public partial class RubiksCube : MonoBehaviour
         DebugKeyword = "";
         try{
             RK = new GameObject[3,3,3];
-            RK_col = new RubiksCubeColorMap();
             WaitRotation = false;
             MainCamera = Camera.main.gameObject;
             int ind = 0;
@@ -67,7 +64,7 @@ public partial class RubiksCube : MonoBehaviour
                     }
                 }
             }
-            SetRK();
+            RK_col = new RubiksCubeColorMap(RK);
             ClearLog();
             debug();
         }   
@@ -96,51 +93,53 @@ public partial class RubiksCube : MonoBehaviour
                     if (AutoModeStage == 0)
                     {
                         isAutoMode = AutoMode.None;
+                        AutoModeStopStage = 0;
                     }
-                    else if (AutoModeStage == 1)
+                    else if (AutoModeStage == 1 && AutoModeStopStage >= 1)
                     {
                         Auto1CallBack();
                     }
-                    else if (AutoModeStage == 2)
+                    else if (AutoModeStage == 2 && AutoModeStopStage >= 2)
                     {
                         Auto2CallBack();
                     }
-                    else if (AutoModeStage == 3)
+                    else if (AutoModeStage == 3 && AutoModeStopStage >= 3)
                     {
                         Auto3CallBack();
                     }
-                    else if (AutoModeStage == 4)
+                    else if (AutoModeStage == 4 && AutoModeStopStage >= 4)
                     {
                         Auto4CallBack();
                     }
-                    else if (AutoModeStage == 5)
+                    else if (AutoModeStage == 5 && AutoModeStopStage >= 5)
                     {
                         Auto5CallBack();
                     }
-                    else if (AutoModeStage == 6)
+                    else if (AutoModeStage == 6 && AutoModeStopStage >= 6)
                     {
                         Auto6CallBack();
                     }
-                    else if (AutoModeStage == 7)
+                    else if (AutoModeStage == 7 && AutoModeStopStage >= 7)
                     {
                         Auto7CallBack();
                     }
-                    else if (AutoModeStage == 8)
+                    else if (AutoModeStage == 8 && AutoModeStopStage >= 8)
                     {
                         Auto8CallBack();
                     }
-                    else if (AutoModeStage == 9)
+                    else if (AutoModeStage == 9 && AutoModeStopStage >= 9)
                     {
                         Auto9CallBack();
                     }
                     else
                     {
-                        EmergencyStop("Auto Mode Stage Error");
+                        // Normally stopped here
                     }
                 }
                 else
                 {
                     isAutoMode = AutoMode.None;
+                    AutoModeStopStage = 0;
                 }
             }
             else if (isAutoMode == AutoMode.Random10Mode)
@@ -160,72 +159,20 @@ public partial class RubiksCube : MonoBehaviour
                 }
             }
             else if (Input.GetMouseButtonDown(0)) 
-            {    
-                mouseClick1 = Input.mousePosition;
-                Ray ray = Camera.main.ScreenPointToRay(mouseClick1);
-                RaycastHit hit = new RaycastHit();
-                if (Physics.Raycast(ray, out hit, MainCamera.transform.position.magnitude))
-                {
-                    clickedGameObject1 = hit.collider.gameObject;
-                }
+            {
+                LeftButtonDownFcn();
             }
             else if (Input.GetMouseButtonUp(0) && clickedGameObject1 != null)
             {
-                mouseClick2 = Input.mousePosition;
-                Vector3 diff = mouseClick2 - mouseClick1;
-                Vector3 worldMov;
-                if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
-                {
-                    worldMov = Camera.main.transform.TransformDirection((diff.x > 0) ? Vector3.down : Vector3.up);
-                    // When mouse moves to right, the rotation axis should be vertical
-                    // Convert camera's vertical direction vector to global world coordinate
-                }
-                else
-                {
-                    worldMov = Camera.main.transform.TransformDirection((diff.y > 0) ? Vector3.right : Vector3.left);
-                    // When mouse moves to up, the rotation axis should be horizontal
-                    // Convert camera's horizontal direction vector to global world coordinate
-                }
-                worldMov.Normalize();
-                float[] XYZdot = new float[3];
-                XYZdot[0] = Vector3.Dot(worldMov, Vector3.right);
-                XYZdot[1] = Vector3.Dot(worldMov, Vector3.up);
-                XYZdot[2] = Vector3.Dot(worldMov, Vector3.forward);
-                Vector3 rotAxis = new Vector3(0,0,0);
-                int rotangle=0, linenum = 0;
-                bool rotateFlag = true;
-                if (diff.magnitude < 30)
-                {
-                    rotateFlag = false;
-                }
-                else if (Mathf.Abs(XYZdot[0]) > Mathf.Abs(XYZdot[1])/1.5f && Mathf.Abs(XYZdot[0]) > Mathf.Abs(XYZdot[2])/1.5f)
-                {
-                    rotangle = (XYZdot[0] > 0) ? 90 : -90;
-                    rotAxis = new Vector3(1, 0, 0);
-                    linenum = Mathf.RoundToInt(clickedGameObject1.transform.position.x);
-                }
-                else if (Mathf.Abs(XYZdot[1]) > Mathf.Abs(XYZdot[0])/1.5f && Mathf.Abs(XYZdot[1]) > Mathf.Abs(XYZdot[2])/1.5f)
-                {
-                    rotangle = (XYZdot[1] > 0) ? 90 : -90;
-                    rotAxis = new Vector3(0, 1, 0);
-                    linenum = Mathf.RoundToInt(clickedGameObject1.transform.position.y);
-
-                }
-                else if (Mathf.Abs(XYZdot[2]) > Mathf.Abs(XYZdot[0])/1.5f && Mathf.Abs(XYZdot[2]) > Mathf.Abs(XYZdot[1])/1.5f)
-                {
-                    rotangle = (XYZdot[2] > 0) ? 90 : -90;
-                    rotAxis = new Vector3(0, 0, 1);
-                    linenum = Mathf.RoundToInt(clickedGameObject1.transform.position.z);
-                }
-                else
-                {
-                    rotateFlag = false;
-                }
-                if (rotateFlag)
-                {
-                    RotateCube(rotAxis, linenum, rotangle);
-                }
-                clickedGameObject1 = null;
+                LeftButtonUpFcn();
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                RightButtonDownFcn();
+            }
+            else if (Input.GetMouseButtonUp(1) && clickedGameObject2 != null)
+            {
+                RightButtonUpFcn();
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -278,11 +225,13 @@ public partial class RubiksCube : MonoBehaviour
                     break;
                 }
             }  
-            // Finish Rotation
-            SetRK();
-            debug();
             WaitRotation = tmp_isRot;
-
+            if (!tmp_isRot)
+            {
+                // Finish Rotation
+                SetRK();
+                debug();
+            }
         }
     }
 

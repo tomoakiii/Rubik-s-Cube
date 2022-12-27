@@ -50,7 +50,7 @@ public partial class RubiksCube : MonoBehaviour
 
     public void RunButtonCallback()
     {
-        StringReader sr = new StringReader(inputscript.get());
+        StringReader sr = new(inputscript.get());
         string line;
         SolveScript.Clear();
         while ((line = sr.ReadLine()) != null) {
@@ -68,6 +68,71 @@ public partial class RubiksCube : MonoBehaviour
             str = str  + GameLog[n] + "\n";
         }
         GUIUtility.systemCopyBuffer = str;
+    }
+
+
+    public void FacingCallback()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
+        RaycastHit hit = new();
+        if (Physics.Raycast(ray, out hit, MainCamera.transform.position.magnitude))
+        {
+            object tmpObject = hit.collider.gameObject;
+        }
+        else
+        {
+            EmergencyStop("Facing Failure");
+        }
+    }
+
+    public void OneFaceCallback()
+    {
+        isAutoMode = AutoMode.AutoSequenceMode;
+        AutoModeStage = 1;
+        AutoModeStopStage = 4;
+    }
+    public void AutoResolveCallback()
+    {
+        isAutoMode = AutoMode.AutoSequenceMode;
+        AutoModeStage = 1;
+        AutoModeStopStage = 100;
+    }
+
+    public void UPCallback()
+    {
+        isAutoMode = AutoMode.AutoResolveMode;
+        SolveScript.Clear();
+        SolveScript.Add("Z, 90"); 
+    }
+    public void DWCallback()
+    {
+        isAutoMode = AutoMode.AutoResolveMode;
+        SolveScript.Clear();
+        SolveScript.Add("Z, -90");
+    }
+    public void RHCallback()
+    {
+        isAutoMode = AutoMode.AutoResolveMode;
+        SolveScript.Clear();
+        SolveScript.Add("Y, -90");
+    }
+    public void LHCallback()
+    {
+        isAutoMode = AutoMode.AutoResolveMode;
+        SolveScript.Clear();
+        SolveScript.Add("Y, 90");
+    }
+    public void RightTriggerCallback()
+    {
+        isAutoMode = AutoMode.AutoResolveMode;
+        SolveScript.Clear();
+        Solve_Operation_right();
+    }
+    public void LeftTriggerCallback()
+    {
+        isAutoMode = AutoMode.AutoResolveMode;
+        SolveScript.Clear();
+        Solve_Operation_left();
     }
 }
 

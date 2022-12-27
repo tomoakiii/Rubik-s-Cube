@@ -368,6 +368,8 @@
 "Assets/RubiksCube_Auto7.cs"
 "Assets/RubiksCube_Auto8.cs"
 "Assets/RubiksCube_Auto9.cs"
+"Assets/RubiksCube_Auto_Commands.cs"
+"Assets/RubiksCube_ButtonDownFcn.cs"
 "Assets/RubiksCube_Callback.cs"
 "Assets/SingleCubeColor.cs"
 "Assets/StandardRK.cs"

@@ -9,20 +9,24 @@ using StandardRK;
 
 public partial class RubiksCube : MonoBehaviour
 {
+    private Colors[] TargetColors = new Colors[2];
+    //CheckIfFaceComplete(TargetColors);
+    
     public void Auto1CallBack()
     {
         isAutoMode = AutoMode.AutoSequenceMode;
         AutoModeStage = 1;
         SolveScript.Clear();
 
-        YtoDisignedColor(Colors.Yellow);
-        if (SolveScript.Count > 0)
+        if (CheckIfFaceComplete(TargetColors))
         {
-            return;
+            AutoModeStage = 5;
         }
-
-        //isAutoMode = AutoMode.None;
-        AutoModeStage = 2;
+        else
+        {
+            AutoModeStage = 2;
+        }
+        YtoDisignedColor(TargetColors[0]);
     }
 
     private void YtoDisignedColor(Colors inCol)
@@ -66,63 +70,40 @@ public partial class RubiksCube : MonoBehaviour
         }
     }
 
-    private void Solve_OperationB()
+    
+    private bool CheckIfFaceComplete(Colors[] retColors)
     {
-        SolveScript.Add("X, 1, -90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, -1, 90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, -1, -90");
-        SolveScript.Add("X, 1, 90");
-    }
+        retColors[0] = RK_col.GetCellColor("+Y", 1, 1);
+        retColors[1] = RK_col.GetCellColor("-Y", 1, 1);
+        string[] scanDir = new string[] { "+X", "+Y", "+Z", "-X", "-Y", "-Z" };
+        for (int i = 0; i < 6; i++)
+        {
+            bool isFindComp = true;
+            string tmpDir = scanDir[i];
+            string tmpBackDir = scanDir[(i+3)%6];
 
-    private void Solve_OperationC1()
-    {
-        SolveScript.Add("Z, -1, 90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, -1, -90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, -1, 90");
-        SolveScript.Add("Y, 1, 180");
-        SolveScript.Add("Z, -1, -90");
-    }
-
-    private void Solve_OperationC2()
-    {
-        SolveScript.Add("Z, 1, 90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, 1, -90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, 1, 90");
-        SolveScript.Add("Y, 1, 180");
-        SolveScript.Add("Z, 1, -90");
-    }
-
-    private void Solve_OperationD()
-    {
-        SolveScript.Add("Z, -1, 90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, -1, -90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, 1, 90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, -1, 90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, -1, -90");
-        SolveScript.Add("Z, 1, -90");
-    }
-
-    private void Solve_OperationE()
-    {
-        SolveScript.Add("Z, 1, 90");
-        SolveScript.Add("Z, -1, 90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, 1, -90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, -1, -90");
-        SolveScript.Add("Y, 1, 90");
-        SolveScript.Add("Z, 1, 90");
-        SolveScript.Add("Y, 1, -90");
-        SolveScript.Add("Z, 1, -90");
+            for (int y = 0; y < 2; y++)
+            {
+                for (int x = 0; x < 2; x++)
+                {
+                    if (RK_col.GetCellColor(tmpDir, x, y) != RK_col.GetCellColor(tmpDir, 1, 1))
+                    {
+                        isFindComp = false;
+                        break;
+                    }
+                }
+                if (!isFindComp)
+                {
+                    break;
+                }
+            }
+            if (isFindComp)
+            {
+                retColors[1] = RK_col.GetCellColor(tmpDir, 1, 1);
+                retColors[0] = RK_col.GetCellColor(tmpBackDir, 1, 1);
+                return true;
+            }
+        }
+        return false;
     }
 }
